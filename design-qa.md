@@ -68,3 +68,7 @@ Validation: native intermediate scrolling, next/previous and boundary disabled s
 Accepted differences: two actual portfolio projects instead of fifteen services, four topic tiles instead of six, generated pastel studio photography instead of the source stock photos. Pinned movement matches the observed reference mechanism, while native device scroll speed and the brief text transition are implementation choices. No unresolved P0/P1/P2 findings.
 
 final result: passed
+
+## Lower glass and image loading correction
+Source: latest user screenshot codex-clipboard-582853f3-cc68-4656-9207-cd4897f31cf1.png (1515 × 687). Evidence: .local/lower-glass-desktop.png (1071 × 615). Both opened in the same comparison response; proportional comparison, no density or pixel-equivalence claim. Panel now bottom-aligned with 5vh lower spacing, glass alpha .43 desktop/.51 phone versus prior .60; topic tile alpha .14. Typography and verified copy retained. Bundled source imports validate and emit both image paths; browser confirmed both decode at 1536px natural width after reload. User screenshot had broken image; cannot conclusively reproduce its original cause, so no specific root cause claimed. In-panel next/previous CTAs removed; remaining arrow navigation checked on phone. Phone 390 × 844 inspected with readable summary, all four tiles and bottom controls visible. Production build and four checks passed. Hero unchanged. No unresolved P0/P1/P2 issues.
+final result: passed

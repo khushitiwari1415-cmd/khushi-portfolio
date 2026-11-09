@@ -45,3 +45,5 @@ The case-study showcase now follows the supplied Consulting Services reference: 
 ## Background and motion revision
 
 Case studies now use two full photographic backgrounds generated for decorative use (`workspace-background.png`, `intent-background.png`). These are fictional studio scenes, not project documentation. The foreground panel and navigation stay pinned while the photographs slide vertically with native scroll progress. Text changes at the midpoint; inactive panels are inert and hidden from screen readers. Reduced-motion mode uses static scene changes. This supersedes the earlier receding-card animation and blurred-cover backgrounds. Hero remains unchanged.
+
+Background photos now live under src/assets and are imported for validated, hashed production URLs. Panel placement is near the bottom with lighter glass. Only Read case study remains inside each panel; previous/next navigation uses the arrow controls beneath.

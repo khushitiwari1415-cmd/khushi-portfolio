@@ -53,3 +53,9 @@
 @media(prefers-reduced-motion:reduce){.project{transition:none;transform:none}.scene-track{will-change:auto}}
 @media(min-width:801px){.project-stack{height:calc(2 * max(100svh,570px))}.project-anchor:last-of-type{top:max(100svh,570px)!important}}
 @media(prefers-reduced-motion:reduce){.scene-track{transform:none}.scene{position:absolute;inset:0;opacity:0}.scene.scene-active{opacity:1}}
+/* Lower reference placement with lighter glass. */
+.showcase-stage{justify-content:flex-end;padding:0 0 clamp(24px,5vh,54px)}
+.project-layout{background:rgba(23,19,29,.43);backdrop-filter:blur(18px)}
+.topic-tile{background:rgba(240,232,241,.14)}
+.all-work,.current-project,.project-controls button{background:rgba(23,19,29,.43);backdrop-filter:blur(18px)}
+@media(max-width:800px){.showcase-stage{padding-bottom:24px}.project-layout{background:rgba(23,19,29,.51)}}
