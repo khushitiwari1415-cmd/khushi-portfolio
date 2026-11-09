@@ -86,3 +86,34 @@ Iteration: initial Curiosity preview used a wide text banner that cropped its ba
 No actionable P0/P1/P2 issues remain. Accepted differences: portfolio principles instead of another studio's articles, read/close actions instead of publication dates, additional heading, accessible inline expansions.
 
 final result: passed
+
+## Letters after sunset footer QA — 9 November 2026
+
+Source truth: supplied `Screen Recording 2026-10-20 194148.mp4` (13.8333 seconds), inspected at 0s, 8s, and 12s. Scene capture `.local/footer-source.png` (1280 × 720 including letterboxing and player controls). New original scene: `src/assets/letters-sunset.png` (1536 × 1024); envelope sprite `src/assets/letter-envelope.png` (transparent generated raster). Implementation evidence `.local/footer-desktop.png` (1265 × 889, 1280 × 900 CSS viewport), `.local/footer-composer.png` (1280 × 900 dialog capture), and `.local/footer-mobile-preview.png` (390 × 844 phone preview). Source and full footer capture were opened together in one comparison response. Compared the same overview concept, excluding player chrome; this is an intentional creative adaptation, not a pixel clone. Composer, preview, flight, handoff, and phone layouts were also visually inspected.
+
+Required fidelity surfaces:
+
+- Typography: existing DM Sans and Georgia editorial hierarchy retained. New headline and modal headings wrap cleanly; letter salutation/signature use readable serif italics, body remains plain text with preserved line breaks.
+- Spacing/layout: invitation and CTA flank each other on desktop, stack on phone. Wide scene crop preserves seated designer and postbox. Modal stays within viewport and scrolls for smaller desktop heights; phone write/preview/handoff layouts fit without horizontal overflow. Postbox hit area aligns with actual scene artwork.
+- Colors: cream/plum interface with lavender, apricot, sage stamp choices; pastel sunset maintains portfolio palette. Inputs, selected stamp outline, focus borders and primary CTA clearly distinguish states.
+- Images: both actual generated files decode and build with hashed URLs. Scene and sprite inspected at full resolution before placement. No CSS-drawn scenery or fake placeholder assets.
+- Content: user-selected private delivery and exact supplied email. No invented visitor counts or public guestbook. Status copy distinguishes ready/folded from sent/delivered. The final step explicitly requires the visitor to send in their own mail app.
+
+Interaction verification:
+
+1. Invitation and illustrated postbox both open the composer. First-name field receives focus.
+2. Empty required name blocked by native validation. Malformed optional reply email blocked. Whitespace-only name/message blocked by trimmed-content validation. Character count updates.
+3. Apricot and Sage selections persist into their matching preview stamps. Message and name appear exactly in paper preview.
+4. Escape closes; reopening preserves the draft and preview step. Keep writing returns to editable fields. Close/backdrop handling is implemented; Escape and explicit close verified.
+5. Seal closes modal, brings the scene into view, disables duplicate triggers, flies the envelope for 1.5s, then opens handoff after the 1.8s sequence. Desktop and phone flight states visually checked. Small envelope remains by the postbox.
+6. Final mailto href inspected: recipient exactly khushitiwari1415@gmail.com, encoded subject/body include synthetic test letter and sender. No actual email-app send or delivery was exercised.
+7. Copy returned success feedback. Download produced a plain text letter file during browser test. Read-again and new-letter controls present and routed in source. No message persistence or network form submission.
+8. Keyboard loop initially let backward Tab reach the document body in this browser. Added explicit first/last focus handling; retest moves from name to Close to Preview and document.activeElement remains inside dialog. Escape returns focus to opener. Focus moves to headings between steps.
+9. Reduced-motion CSS removes envelope travel and hover translation; JavaScript skips flight delay and smooth scene scroll. Branch inspected, OS setting not changed in browser.
+10. Phone 390 × 844: all stages readable, reply field stacks, full-width actions, dialog width about352px; page scroll width390px, no horizontal overflow. Native dialog keeps background inert and page scroll is locked.
+
+Comparison history: first scene view left the lower artwork outside a short desktop viewport during seal. Added scene-centering scroll before flight and inspected phone animation with entire scene visible. Initial modal focus landed on Close; corrected to name field and retested. Keyboard edge case corrected as above. Postbox arrival coordinates adjusted after inspecting original illustration.
+
+Production build succeeds; four bundled serving/package tests pass. Final build rerun after keyboard/Escape refinements. Final browser error/warning log empty after reload. No actionable P0/P1/P2 findings remain. Limits: email-client launch and actual delivery are external; reduced-motion preference checked in code rather than changing OS settings. PNG assets are several MB combined and could be optimized later without changing the interaction.
+
+final result: passed
