@@ -47,3 +47,9 @@ The case-study showcase now follows the supplied Consulting Services reference: 
 Case studies now use two full photographic backgrounds generated for decorative use (`workspace-background.png`, `intent-background.png`). These are fictional studio scenes, not project documentation. The foreground panel and navigation stay pinned while the photographs slide vertically with native scroll progress. Text changes at the midpoint; inactive panels are inert and hidden from screen readers. Reduced-motion mode uses static scene changes. This supersedes the earlier receding-card animation and blurred-cover backgrounds. Hero remains unchanged.
 
 Background photos now live under src/assets and are imported for validated, hashed production URLs. Panel placement is near the bottom with lighter glass. Only Read case study remains inside each panel; previous/next navigation uses the arrow controls beneath.
+
+## Behind the pixels — editorial notes section
+
+User expanded scope to add a section after the case studies, based on `Screen Recording 2026-11-01 152738.mp4`. The video shows four ruled editorial rows with a floating image preview. New content is four short design principles: clarity, collaboration, intent, curiosity. Copy draws from the verified Notion introduction and the two project descriptions; no dated articles, credentials, or results were invented. The wording follows the concise reflective style of the existing Notion text. Notes expand inline and link to the original source case studies or portfolio.
+
+The image preview follows the pointer on devices with hover, also appears on keyboard focus, and is hidden on touch devices. Rows remain fully operable on phones and with Enter/Space, with aria-expanded and labeled regions. Only one note opens at a time. Existing hero and case-study visuals remain unchanged. This supersedes the original two-section-only scope at the user's request.
