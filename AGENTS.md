@@ -12,3 +12,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 Keep only hero and selected case studies. Use the supplied oversized editorial reference, pastel cream/lavender/peach palette, restrained motion, and verified Notion content. Never invent project results.
 
 Case studies: follow the clean Consulting Services reference: one frosted central panel, project summary left, four case-related text tiles in a 2x2 grid right, and floating label/counter with arrow controls. Keep the hero unchanged during this iteration.
+
+Background/motion refinement: use full photographic backgrounds behind the glass. Match the supplied video with a pinned foreground panel and navigation, vertically sliding background scenes, and a brief text change at the scene midpoint. Keep native scrolling and reduced-motion support. Generated photos are decorative, never evidence of project teams or results.

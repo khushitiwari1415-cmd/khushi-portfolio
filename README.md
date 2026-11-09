@@ -41,3 +41,7 @@ Production build and all four starter serving/package tests pass. Browser checks
 ## Case-study panel update
 
 The case-study showcase now follows the supplied Consulting Services reference: a dark translucent central panel, project title and summary on the left, four related text themes on the right, two pill actions, and the floating project navigation below. Original project artwork is blurred behind the panel. Scroll progress gently recedes the outgoing card; reduced-motion mode removes that effect. The hero was left unchanged.
+
+## Background and motion revision
+
+Case studies now use two full photographic backgrounds generated for decorative use (`workspace-background.png`, `intent-background.png`). These are fictional studio scenes, not project documentation. The foreground panel and navigation stay pinned while the photographs slide vertically with native scroll progress. Text changes at the midpoint; inactive panels are inert and hidden from screen readers. Reduced-motion mode uses static scene changes. This supersedes the earlier receding-card animation and blurred-cover backgrounds. Hero remains unchanged.

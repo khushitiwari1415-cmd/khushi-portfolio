@@ -52,3 +52,19 @@ Interactions: in-panel Next/Previous actions and floating arrows move between pr
 Accepted differences: source people photo replaced with blurred original project artwork, palette remains pastel/plum, source service labels replaced with project-specific text. Tiles are descriptive content, not tabs that imply hidden panels. No actionable P0/P1/P2 findings remain for this requested adaptation.
 
 final result: passed
+
+## Photo backgrounds and pinned scene transition — 9 November 2026
+
+This entry supersedes earlier descriptions of receding or stacked case-study cards.
+
+Source: supplied `Screen Recording 2026-11-01 152632.mp4`, inspected at 1s and 2s via `.local/reference.html`. Source frame saved as `.local/motion-source.png` (1280 × 720 including video letterboxing and controls). Implementation evidence: `.local/background-transition.png` and `.local/background-final.png` (approximately 1071 × 615 browser surface). Source and implementation transition screenshots opened together in one tool response. Comparison evaluated the video content region and normalized layout proportions; no pixel-for-pixel or timing-equivalence claim. Desktop CSS viewport approximately 1087 × 615, phone 390 × 844. Mobile and desktop resting scenes inspected.
+
+Reference finding: foreground panel and nav remain fixed while complete photographic backgrounds translate vertically. The earlier outgoing-card scaling was the wrong mechanism and has been removed. The new two-screen scroll region pins one stage, translates its two-image background track with native scroll progress, and changes active project at the midpoint with a short opacity/12px content transition. Foreground top measured 115.3375px before scroll and 115.2000px at progress 0.4004; navigation 496.3375px and 496.2000px. Difference under 0.14px from layout rounding. The transition capture visibly shows the boundary between photos moving behind the fixed glass panel, as in the video.
+
+Required fidelity surfaces: compact DM Sans project title/body hierarchy preserved; centered rounded panel plus 2×2 tiles and pill navigation retained; lavender/peach photographic accents and dark translucent glass preserve the requested palette; two sharp generated background photos replace blurred case covers; all verified project text unchanged. Generated scenes are decorative fictional studio images, not evidence of real project teams. Hero untouched.
+
+Validation: native intermediate scrolling, next/previous and boundary disabled states, active label, both photo decodes, phone layout with no horizontal overflow (375px scroll width versus 390px viewport), build and four bundled tests pass. Inactive panels are inert and hidden from accessibility APIs. Reduced-motion CSS disables the vertical track transform and content transitions, switching to the active static scene; CSS branch inspected, OS preference not changed. Console contained a development hot-reload websocket reconnect message from the restarted preview; no application exceptions observed.
+
+Accepted differences: two actual portfolio projects instead of fifteen services, four topic tiles instead of six, generated pastel studio photography instead of the source stock photos. Pinned movement matches the observed reference mechanism, while native device scroll speed and the brief text transition are implementation choices. No unresolved P0/P1/P2 findings.
+
+final result: passed
