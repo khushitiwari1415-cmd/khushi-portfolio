@@ -37,3 +37,7 @@ Native scrolling works with mouse, touch, and keyboard. Controls use stable docu
 ## Validation
 
 Production build and all four starter serving/package tests pass. Browser checks covered desktop (1517 × 696) and phone (390 × 844), project controls in both directions, active labels, image loading, and console errors. QA is recorded in `design-qa.md`. Local reference files and screenshots remain ignored in `.local/`.
+
+## Case-study panel update
+
+The case-study showcase now follows the supplied Consulting Services reference: a dark translucent central panel, project title and summary on the left, four related text themes on the right, two pill actions, and the floating project navigation below. Original project artwork is blurred behind the panel. Scroll progress gently recedes the outgoing card; reduced-motion mode removes that effect. The hero was left unchanged.

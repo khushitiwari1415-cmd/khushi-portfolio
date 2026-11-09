@@ -36,3 +36,19 @@ Viewport: desktop 1517 × 696 CSS pixels; phone 390 × 844 CSS pixels. Desktop c
 ## Accepted differences and follow-up polish
 
 This is the requested pastel adaptation: project surfaces and original artwork replace stock photography and dark glass panels from the motion recording. It preserves stacked scroll and floating navigation, not the video's precise panel artwork. No P0/P1/P2 issues remain within that adaptation. Full visual parity with the original screenshot portrait would require Khushi's chosen portrait, which was not supplied. Source cover text is small on narrow screens, while equivalent project titles and summaries remain available as readable HTML.
+
+## Case-study panel refinement — 9 November 2026
+
+This entry supersedes the earlier case-study appearance review.
+
+Source: `C:/Users/khush/AppData/Local/Temp/codex-clipboard-4dee58d8-00d7-4fe3-802c-8eaf14a624d2.png`, 1513 × 622 pixels. The user requested the Consulting Services panel structure with case-study copy and four related word-only containers. Hero remains unchanged.
+
+Evidence: `.local/case-desktop.png` and `.local/case-mobile.png`. Desktop browser viewport approximately 1513 × 622 CSS pixels (backend reports 1514 × 622); captured desktop content 1498 × 616 pixels due browser capture surface. Source and final capture were opened together in one tool response. Regions were compared proportionally, without claiming pixel equivalence. Phone viewport 390 × 844 CSS pixels. First-panel resting state and both navigation directions inspected. The earlier initial capture immediately after resize was clipped by the browser capture surface; fresh settled capture confirms the whole panel fits.
+
+Typography: compact bold project title, smaller subtitle/body, readable white tile labels, and small case index match the source hierarchy. Spacing: single centered glass container, summary left, 2×2 text grid right; rounded pills beneath. Four tiles stack below the summary on phone. Colors: dark plum translucent surface, lavender-tinted tiles and peach/lavender source-image wash adapt the original palette. Images: existing case-study covers supply a blurred decorative background; no stock photo or invented product mockup. Copy: workspace/app/team themes and preventive UX/friction/action-placement themes come from verified source descriptions; no new outcome claims.
+
+Interactions: in-panel Next/Previous actions and floating arrows move between projects, labels update 1/2 and 2/2, boundary arrows disable. Outgoing card recedes by at most 4.5%, 24px, and 35% opacity during the native stacked scroll. Reduced-motion CSS suppresses these transforms and fading. No scroll interception. Both phone and desktop checked, eight total topic tiles present, phone scroll width 375px versus 390px viewport, no overflow. Console warnings/errors empty. Production build and four existing tests pass.
+
+Accepted differences: source people photo replaced with blurred original project artwork, palette remains pastel/plum, source service labels replaced with project-specific text. Tiles are descriptive content, not tabs that imply hidden panels. No actionable P0/P1/P2 findings remain for this requested adaptation.
+
+final result: passed
