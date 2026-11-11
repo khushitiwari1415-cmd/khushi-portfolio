@@ -2,7 +2,7 @@ const links = [
   ['Work', '/#work'],
   ['Resume', '/resume'],
   ['About', '/about'],
-  ['Contact', '/#letters'],
+  ['Contact', '/contact'],
 ];
 
 export function SiteHeader({ current }) {

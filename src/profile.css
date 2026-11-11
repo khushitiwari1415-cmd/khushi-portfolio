@@ -1,0 +1,258 @@
+.profile-page {
+  width: min(1400px, 96%);
+  margin: 0 auto 60px;
+}
+
+.profile-cover,
+.contact-cover {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: clamp(320px, 52svh, 540px);
+  padding: clamp(38px, 7vw, 96px) 18px;
+  border-radius: var(--radius-panel);
+  text-align: center;
+}
+
+.profile-cover {
+  border: 1px solid var(--line);
+  background-color: var(--surface);
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.6px);
+  background-size: 40px 40px;
+}
+
+.profile-page h1,
+.about-story h2 {
+  margin: 0;
+  font-family: var(--font-editorial);
+  font-size: clamp(58px, 9.5vw, 132px);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.035em;
+}
+
+.profile-intro {
+  color: var(--accent);
+  font-size: clamp(16px, 2vw, 24px);
+}
+
+.profile-page .hero-link {
+  cursor: pointer;
+}
+
+.about-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(28px, 6vw, 84px);
+  margin-top: 18px;
+  padding: clamp(34px, 7vw, 100px);
+  border-radius: var(--radius-panel);
+  background: var(--scene-base);
+  color: var(--scene-ink);
+}
+
+.about-story h2 {
+  font-size: clamp(48px, 6.3vw, 88px);
+}
+
+.about-story h2 em,
+.contact-cover h1 em {
+  color: var(--scene-action);
+}
+
+.about-story p {
+  max-width: 42ch;
+  margin: 0 0 20px;
+  font-size: clamp(16px, 1.6vw, 21px);
+  line-height: 1.55;
+}
+
+.profile-link {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 44px;
+  color: var(--scene-action);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.profile-end {
+  padding: 32px 0 8px;
+  text-align: center;
+}
+
+.resume-work {
+  width: min(1000px, 92%);
+  margin: 54px auto;
+}
+
+.resume-work h2 {
+  margin-bottom: 24px;
+  font-size: clamp(28px, 4vw, 45px);
+}
+
+.resume-project {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+
+.resume-project h3 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -.035em;
+}
+
+.resume-project h3 a:hover {
+  color: var(--accent);
+}
+
+.resume-project p {
+  line-height: 1.55;
+}
+
+.resume-project img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-tile);
+}
+
+.profile-meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.contact-cover {
+  min-height: clamp(510px, 76svh, 720px);
+  padding-block: clamp(36px, 4vw, 64px);
+  background: radial-gradient(ellipse at top, var(--scene-hover), var(--scene-base) 74%);
+  color: var(--scene-ink);
+}
+
+.contact-cover > img {
+  width: clamp(72px, 8vw, 112px);
+  height: auto;
+  margin: 0 0 10px;
+  transform: rotate(-8deg);
+  transition: transform .25s ease;
+}
+
+.contact-cover > img:hover {
+  transform: translateY(-5px) rotate(3deg);
+}
+
+.contact-cover h1 {
+  max-width: 21ch;
+  font-size: clamp(49px, 7.5vw, 112px);
+}
+
+.contact-cover > p {
+  color: var(--scene-muted);
+  line-height: 1.5;
+}
+
+.contact-email,
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.contact-email > a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.contact-email button,
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 15px;
+  border: 1px solid var(--scene-line);
+  border-radius: var(--radius-pill);
+  color: var(--scene-ink);
+  background: var(--scene-tile);
+  font-size: 13px;
+}
+
+.contact-email button {
+  cursor: pointer;
+}
+
+.contact-email button:hover,
+.contact-links a:hover {
+  background: var(--scene-action);
+  color: var(--scene-action-ink);
+}
+
+.contact-cover :focus-visible,
+.about-story :focus-visible {
+  outline-color: var(--scene-action);
+}
+
+.contact-feedback {
+  min-height: 20px;
+  margin: 6px 0 10px;
+  font-size: 13px;
+}
+
+.contact-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 640px) {
+  .about-story,
+  .resume-project {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-cover {
+    padding-block: 36px;
+  }
+}
+
+@media print {
+  .site-header,
+  .skip,
+  .profile-cover button,
+  .resume-project img {
+    display: none;
+  }
+
+  .profile-page,
+  .resume-work {
+    width: 100%;
+    margin: 0;
+  }
+
+  .profile-cover {
+    display: block;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+  }
+
+  .profile-cover h1 {
+    font-size: 48px;
+  }
+
+  .resume-project {
+    display: block;
+    break-inside: avoid;
+  }
+}
