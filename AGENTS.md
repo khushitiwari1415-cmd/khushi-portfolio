@@ -9,6 +9,8 @@ When implementing from a selected generated mock, treat that image as the source
 Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs`, and `tests/sites-worker.test.mjs` intact so the same local prototype can be handed to Sites. Before a Sites handoff, run `npm run build` and `npm run test:sites`; the build must leave `dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`.
 
 ## Portfolio scope
+Hero refinement: use the full name as the editorial focal point, with a single short introduction and a clear link to selected work on a soft pastel background.
+
 Keep only hero and selected case studies. Use the supplied oversized editorial reference, pastel cream/lavender/peach palette, restrained motion, and verified Notion content. Never invent project results.
 
 Case studies: follow the clean Consulting Services reference: one frosted central panel, project summary left, four case-related text tiles in a 2x2 grid right, and floating label/counter with arrow controls. Keep the hero unchanged during this iteration.
