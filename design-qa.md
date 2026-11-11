@@ -125,3 +125,11 @@ Compared the supplied reference with the local desktop capture at .local/hero-do
 Checked the narrow layout in the browser, followed the work link to #work, and checked the browser console. Production build and all four hosting tests passed.
 
 final result: passed
+
+## Case-study detail pages
+
+Compared the Clinspire reference with .local/case-detail-desktop.png and .local/case-detail-contents.png. The new pages follow its left-aligned headline, wide cover, sticky contents rail, narrow article column, and related project section. The covers retain the original Notion aspect ratio, and the shared portfolio colors and footer carry through.
+
+Verified Organisation in desktop Chrome and the Intent layout at 390px. Tested section jumps, active section, Back to top, and navigation between projects. Fixed a global navigation rule that hid mobile contents links and retested. Original Intent UI screenshots loaded, and the detail preview reported no console errors.
+
+final result: passed
