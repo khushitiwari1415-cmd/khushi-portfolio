@@ -117,3 +117,11 @@ Comparison history: first scene view left the lower artwork outside a short desk
 Production build succeeds; four bundled serving/package tests pass. Final build rerun after keyboard/Escape refinements. Final browser error/warning log empty after reload. No actionable P0/P1/P2 findings remain. Limits: email-client launch and actual delivery are external; reduced-motion preference checked in code rather than changing OS settings. PNG assets are several MB combined and could be optimized later without changing the interaction.
 
 final result: passed
+
+## Portrait-free hero
+
+Compared the supplied reference with the local desktop capture at .local/hero-dotted.png. The centered serif name, italic role, and dotted paper carry the reference's visual hierarchy. The lavender work link supplies the accent, and the hero contains no photo or portrait.
+
+Checked the narrow layout in the browser, followed the work link to #work, and checked the browser console. Production build and all four hosting tests passed.
+
+final result: passed

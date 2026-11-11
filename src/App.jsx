@@ -15,8 +15,8 @@ export function App(){
  return <><a className="skip" href="#main">Skip to content</a><header><a className="brand" href="#main">Khushi Tiwari<span className="brand-dot" aria-hidden="true"/></a><nav aria-label="Main navigation"><a href="#work">Selected work <small>(02)</small></a><a href={base+'khushi-tiwari'} target="_blank" rel="noreferrer">My Notion portfolio</a></nav></header>
  <main id="main">
  <section className="hero" aria-labelledby="hero-title">
+   <h1 id="hero-title">Khushi Tiwari</h1>
    <p className="hero-role">UI/UX Designer</p>
-   <h1 id="hero-title">Khushi <em>Tiwari</em></h1>
    <div className="hero-intro">
      <p>I design digital experiences that make complex tasks feel simpler.</p>
      <a className="hero-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>

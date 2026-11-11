@@ -1,85 +1,74 @@
 .hero {
   display: grid;
   align-content: center;
-  justify-items: start;
-  min-height: clamp(460px, 68svh, 740px);
+  justify-items: center;
+  min-height: clamp(480px, 71svh, 760px);
   margin-inline: clamp(12px, 2.1vw, 40px);
-  padding: clamp(36px, 7vw, 112px);
-  border-radius: 20px;
-  background:
-    radial-gradient(ellipse at 92% 12%, #f4d7c8 0%, transparent 56%),
-    radial-gradient(ellipse at 15% 100%, #ddd2ef 0%, transparent 64%),
-    #f4ebdf;
-}
-
-.hero-role {
-  margin: 0 0 clamp(14px, 2.2vw, 32px);
-  color: #51455c;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  padding: clamp(56px, 8vw, 112px) 20px;
+  border: 1px solid #4d3a6014;
+  border-radius: 16px;
+  background-color: #fcfaf5;
+  background-image: radial-gradient(circle, #66577936 1px, transparent 1.6px);
+  background-size: clamp(26px, 4vw, 48px) clamp(26px, 4vw, 48px);
+  background-position: center;
+  text-align: center;
 }
 
 .hero h1 {
-  margin: 0 0 0 -.055em;
-  font-size: clamp(48px, 12vw, 224px);
-  font-weight: 700;
-  line-height: .96;
-  letter-spacing: -.087em;
+  margin: 0;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(54px, 9.8vw, 152px);
+  font-weight: 400;
+  line-height: .95;
+  letter-spacing: -.035em;
 }
 
-.hero h1 em {
-  font-family: Georgia, serif;
-  font-weight: 400;
-  color: #534361;
+.hero-role {
+  margin: clamp(16px, 2.6vw, 32px) 0 0;
+  color: #51405e;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(29px, 3.4vw, 48px);
+  font-style: italic;
+  line-height: 1;
 }
 
 .hero-intro {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 24px;
-  width: 100%;
-  margin-top: clamp(26px, 4vw, 60px);
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+  margin-top: 18px;
 }
 
 .hero-intro p {
-  max-width: 28ch;
+  max-width: 36ch;
   margin: 0;
-  font-size: clamp(18px, 2vw, 30px);
-  letter-spacing: -.035em;
-  line-height: 1.25;
+  color: #4e4651;
+  font-size: clamp(15px, 1.35vw, 19px);
+  line-height: 1.5;
+  text-wrap: balance;
 }
 
 .hero-link {
   display: inline-flex;
   align-items: center;
   gap: 18px;
-  padding: 12px 17px;
-  border: 1px solid #26232966;
+  min-height: 44px;
+  padding: 10px 17px;
+  border: 1px solid #77628d66;
   border-radius: 40px;
+  background: #ece3f4;
+  color: #352941;
   font-size: 13px;
   font-weight: 600;
-  white-space: nowrap;
 }
 
 .hero-link:hover {
-  background: #fff9;
+  background: #e3d5ef;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .hero {
-    min-height: 420px;
-    padding: 28px;
-  }
-
-  .hero h1 {
-    font-size: clamp(46px, 12.3vw, 73px);
-  }
-
-  .hero-intro {
-    flex-direction: column;
-    align-items: start;
+    min-height: 435px;
+    padding-inline: 16px;
   }
 }
