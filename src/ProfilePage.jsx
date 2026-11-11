@@ -4,6 +4,7 @@ import { caseStudies } from './case-studies.js';
 import envelope from './assets/letter-envelope.png';
 
 const email = 'khushitiwari1415@gmail.com';
+const callRequest = 'mailto:' + email + '?subject=' + encodeURIComponent('Let’s set up a call');
 const contactLinks = [
   ['LinkedIn', 'https://www.linkedin.com/in/khushitiwari1415/'],
   ['GitHub', 'https://github.com/khushitiwari1415-cmd/khushi-portfolio'],
@@ -19,10 +20,29 @@ function About() {
     <section className="about-story" aria-labelledby="about-story-title">
       <h2 id="about-story-title">Curiosity comes <em>first.</em></h2>
       <div>
-        <p>I’m drawn to the why behind every interaction. I turn human needs into clear, intuitive experiences, with a focus on making complex tasks feel simpler.</p>
-        <p>Away from the screen, I’m usually exploring, sketching, or getting lost in music.</p>
+        <p>I start with the why behind an interaction: what someone is trying to do, where they hesitate, and what would make the next step feel clear. I use those answers to shape the flow.</p>
         <a className="profile-link" href="/#behind-the-pixels">Read my design notes <span aria-hidden="true">↗</span></a>
       </div>
+    </section>
+    <section className="about-work" aria-labelledby="about-work-title">
+      <h2 id="about-work-title">That thinking in practice</h2>
+      <div className="about-projects">
+        <a href="/work/organisation">
+          <h3>Organisation</h3>
+          <p>I designed a shared workspace where teams can manage apps, members, and permissions in one place.</p>
+          <span>Read case study ↗</span>
+        </a>
+        <a href="/work/intent">
+          <h3>Designing for Intent, Not Error</h3>
+          <p>I reconsidered where the Delete App action belonged and what users needed to know before committing to it.</p>
+          <span>Read case study ↗</span>
+        </a>
+      </div>
+    </section>
+    <section className="about-away" aria-labelledby="about-away-title">
+      <h2 id="about-away-title">Away from the screen</h2>
+      <p>I’m usually exploring, sketching, or getting lost in music.</p>
+      <blockquote>Great design shouldn’t demand attention. It should feel effortless.</blockquote>
     </section>
     <div className="profile-end"><a className="hero-link" href="/contact">Say hello <span aria-hidden="true">↗</span></a></div>
   </>;
@@ -62,9 +82,11 @@ function Contact() {
 
   return <>
     <div className="contact-cover">
-      <img src={envelope} alt="" width="112" height="112" />
-      <h1>Let’s make something <em>thoughtful.</em></h1>
-      <p>Have a project in mind, or just want to say hello?</p>
+      <a className="contact-envelope" href={callRequest} aria-label="Request a call by email">
+        <img src={envelope} alt="" width="112" height="112" />
+      </a>
+      <h1>Let’s hop on <em>a call.</em></h1>
+      <a className="contact-call" href={callRequest}>Suggest a time by email <span aria-hidden="true">↗</span></a>
       <div className="contact-email">
         <a href={'mailto:' + email}>{email}</a>
         <button type="button" onClick={copyEmail}>Copy email</button>
@@ -93,6 +115,6 @@ export function ProfilePage({ page }) {
   return <>
     <a className="skip" href="#profile-main">Skip to content</a>
     <SiteHeader current={title} />
-    <main className="profile-page" id="profile-main"><Content /></main>
+    <main className={'profile-page profile-' + page} id="profile-main"><Content /></main>
   </>;
 }
