@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { caseStudies } from './case-studies.js';
 import { LetterFooter } from './LetterFooter.jsx';
+import { SiteHeader } from './SiteHeader.jsx';
 import './case-study.css';
 
 function StudyFigure({ image }) {
@@ -59,13 +60,7 @@ export function CaseStudy({ slug }) {
 
   return <>
     <a className="skip" href="#study-main">Skip to case study</a>
-    <header className="study-header" id="top">
-      <a className="brand" href="/">Khushi Tiwari<span className="brand-dot" aria-hidden="true" /></a>
-      <nav aria-label="Main navigation">
-        <a href="/#work">Selected work</a>
-        <a href="#letters">Contact</a>
-      </nav>
-    </header>
+    <SiteHeader />
     <main className="study" id="study-main">
       <div className="study-hero">
         <h1>{study.title}</h1>

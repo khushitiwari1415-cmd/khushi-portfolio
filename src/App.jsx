@@ -1,3 +1,4 @@
+import { SiteHeader } from './SiteHeader.jsx';
 import { LetterFooter } from './LetterFooter.jsx';
 import { DesignNotes } from './DesignNotes.jsx';
 import workspaceBackground from './assets/workspace-background.png';
@@ -47,7 +48,7 @@ export function App(){
    };
  }, []);
  const move=index=>cards.current[index]?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
- return <><a className="skip" href="#main">Skip to content</a><header><a className="brand" href="#main">Khushi Tiwari<span className="brand-dot" aria-hidden="true"/></a><nav aria-label="Main navigation"><a href="#work">Selected work <small>(02)</small></a><a href={base+'khushi-tiwari'} target="_blank" rel="noreferrer">My Notion portfolio</a></nav></header>
+ return <><a className="skip" href="#main">Skip to content</a><SiteHeader />
  <main id="main">
  <section className="hero" aria-labelledby="hero-title">
    <h1 id="hero-title">Khushi Tiwari</h1>

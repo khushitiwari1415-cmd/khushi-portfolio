@@ -218,10 +218,6 @@
   color: var(--accent);
 }
 
-.study-header nav a:last-child {
-  display: inline;
-}
-
 @media (max-width: 720px) {
   .study-layout, .study-more {
     display: block;
