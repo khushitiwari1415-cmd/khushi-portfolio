@@ -51,7 +51,7 @@ export function App(){
  <main id="main">
  <section className="hero" aria-labelledby="hero-title">
    <h1 id="hero-title">Khushi Tiwari</h1>
-   <p className="hero-role">UI/UX Designer</p>
+   <p className="hero-role">Product Designer</p>
    <div className="hero-intro">
      <p>I design digital experiences that make complex tasks feel simpler.</p>
      <a className="hero-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>

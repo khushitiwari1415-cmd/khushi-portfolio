@@ -1,0 +1,66 @@
+:root {
+  color-scheme: light;
+  --page: #faf7f1;
+  --surface: #fffdf8;
+  --ink: #292432;
+  --muted: #62586b;
+  --accent: #634784;
+  --accent-soft: #ebe1f5;
+  --accent-hover: #e2d4ef;
+  --line: #dcd2e3;
+  --grid-dot: #63478432;
+  --footer-surface: #f2ebf3;
+  --shadow: #29243226;
+
+  /* The photographic showcase uses the same plum tones in both themes. */
+  --scene-base: #2d2437;
+  --scene-wash: #2d243747;
+  --scene-glass: #241c2ec2;
+  --scene-tile: #f3e9ff1f;
+  --scene-line: #f3e9ff28;
+  --scene-ink: #fffafc;
+  --scene-muted: #e7dcef;
+  --scene-hover: #58466a;
+  --scene-action: #ebe1f5;
+  --scene-action-hover: #e2d4ef;
+  --scene-action-ink: #352742;
+
+  --font-body: 'DM Sans', Arial, sans-serif;
+  --font-editorial: 'Instrument Serif', Georgia, serif;
+  --radius-panel: 20px;
+  --radius-tile: 14px;
+  --radius-pill: 999px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #211b2a;
+  --surface: #2b2335;
+  --ink: #f5eef7;
+  --muted: #cbbdd4;
+  --accent: #d7bbf2;
+  --accent-soft: #463451;
+  --accent-hover: #554063;
+  --line: #54475e;
+  --grid-dot: #d7bbf240;
+  --footer-surface: #2b2335;
+  --shadow: #0f0a1799;
+}
+
+footer.letter-footer {
+  background: var(--footer-surface);
+  color: var(--ink);
+}
+
+.letter-footer .letter-colophon,
+.letter-footer .letter-private {
+  color: var(--muted);
+}
+
+.letter-intro .letter-secondary {
+  color: var(--ink);
+}
+
+.letter-footer dialog {
+  color-scheme: light;
+}

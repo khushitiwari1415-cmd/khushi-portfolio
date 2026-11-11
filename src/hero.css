@@ -5,10 +5,10 @@
   min-height: clamp(480px, 71svh, 760px);
   margin-inline: clamp(12px, 2.1vw, 40px);
   padding: clamp(56px, 8vw, 112px) 20px;
-  border: 1px solid #4d3a6014;
-  border-radius: 16px;
-  background-color: #fcfaf5;
-  background-image: radial-gradient(circle, #66577936 1px, transparent 1.6px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  background-color: var(--surface);
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.6px);
   background-size: clamp(26px, 4vw, 48px) clamp(26px, 4vw, 48px);
   background-position: center;
   text-align: center;
@@ -16,7 +16,7 @@
 
 .hero h1 {
   margin: 0;
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: var(--font-editorial);
   font-size: clamp(54px, 9.8vw, 152px);
   font-weight: 400;
   line-height: .95;
@@ -25,8 +25,8 @@
 
 .hero-role {
   margin: clamp(16px, 2.6vw, 32px) 0 0;
-  color: #51405e;
-  font-family: 'Instrument Serif', Georgia, serif;
+  color: var(--accent);
+  font-family: var(--font-editorial);
   font-size: clamp(29px, 3.4vw, 48px);
   font-style: italic;
   line-height: 1;
@@ -42,7 +42,7 @@
 .hero-intro p {
   max-width: 36ch;
   margin: 0;
-  color: #4e4651;
+  color: var(--muted);
   font-size: clamp(15px, 1.35vw, 19px);
   line-height: 1.5;
   text-wrap: balance;
@@ -54,16 +54,16 @@
   gap: 18px;
   min-height: 44px;
   padding: 10px 17px;
-  border: 1px solid #77628d66;
-  border-radius: 40px;
-  background: #ece3f4;
-  color: #352941;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--ink);
   font-size: 13px;
   font-weight: 600;
 }
 
 .hero-link:hover {
-  background: #e3d5ef;
+  background: var(--accent-hover);
 }
 
 @media (max-width: 480px) {
