@@ -10,7 +10,42 @@ const projects=[
 {id:'intent',name:'Designing for Intent, Not Error',title:'A little friction.\nA lot more care.',description:'Rethinking a critical deletion flow through preventive UX, intentional friction, and more thoughtful action placement.',tags:['Interaction design','Preventive UX'],facts:[['Project','Deletion flow redesign'],['Approach','Preventive UX'],['Focus','Intentional friction'],['Detail','Action placement']],image:intentBackground,alt:'Original case-study cover: Preventing Accidental Deletions by Design.',url:base+'Designing-for-Intent-Not-Error-32f71ab985688055bd7cece936d4609a'}];
 export function App(){
  const [active,setActive]=useState(0);const [controlsVisible,setControlsVisible]=useState(false);const cards=useRef([]);const stack=useRef(null);
- useEffect(()=>{let frame=0;const update=()=>{frame=0;const root=stack.current;if(!root)return;const height=root.querySelector('.showcase-stage').offsetHeight;const progress=Math.max(0,Math.min(projects.length-1,-root.getBoundingClientRect().top/height));root.style.setProperty('--scene-progress',String(progress));setActive(Math.round(progress));setControlsVisible(true)};const schedule=()=>{if(!frame)frame=requestAnimationFrame(update)};window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();return()=>{window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);cancelAnimationFrame(frame)}},[]);
+ useEffect(() => {
+   const root = stack.current;
+   const stage = root?.querySelector('.showcase-stage');
+   if (!stage) return;
+
+   let frame = 0;
+   const update = () => {
+     frame = 0;
+     const height = stage.offsetHeight;
+     if (height === 0) return;
+
+     const position = -root.getBoundingClientRect().top / height;
+     if (!Number.isFinite(position)) return;
+
+     const progress = Math.max(0, Math.min(projects.length - 1, position));
+     root.style.setProperty('--scene-progress', String(progress));
+     setActive(Math.round(progress));
+     setControlsVisible(true);
+   };
+   const schedule = () => {
+     if (!frame) frame = requestAnimationFrame(update);
+   };
+
+   const observer = new ResizeObserver(schedule);
+   observer.observe(stage);
+   window.addEventListener('scroll', schedule, { passive: true });
+   window.addEventListener('resize', schedule);
+   schedule();
+
+   return () => {
+     observer.disconnect();
+     window.removeEventListener('scroll', schedule);
+     window.removeEventListener('resize', schedule);
+     cancelAnimationFrame(frame);
+   };
+ }, []);
  const move=index=>cards.current[index]?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
  return <><a className="skip" href="#main">Skip to content</a><header><a className="brand" href="#main">Khushi Tiwari<span className="brand-dot" aria-hidden="true"/></a><nav aria-label="Main navigation"><a href="#work">Selected work <small>(02)</small></a><a href={base+'khushi-tiwari'} target="_blank" rel="noreferrer">My Notion portfolio</a></nav></header>
  <main id="main">
