@@ -1,5 +1,6 @@
+import { SunsetCompany } from './SunsetCompany.jsx';
 import { useEffect, useRef, useState } from 'react';
-import sunsetScene from './assets/letters-sunset.png';
+import sunsetScene from './assets/letters-sunset-empty.png';
 import envelopeSprite from './assets/letter-envelope.png';
 import './letter-footer.css';
 
@@ -11,6 +12,7 @@ export function LetterFooter() {
   const trigger = useRef(null);
   const opener = useRef(null);
   const scene = useRef(null);
+  const world = useRef(null), company = useRef(null);
   const timer = useRef(null);
   const [step,setStep] = useState('write');
   const [name,setName] = useState('');
@@ -22,19 +24,21 @@ export function LetterFooter() {
   const [feedback,setFeedback] = useState('');
   const [emailOpened,setEmailOpened] = useState(false);
   const [error,setError] = useState('');
+  const [folding,setFolding]=useState(false),[journey,setJourney]=useState(false),[companyStatus,setCompanyStatus]=useState('');
   useEffect(()=>()=>{clearTimeout(timer.current);document.body.style.overflow='';},[]);
   useEffect(()=>{if(dialog.current?.open){dialog.current.querySelector(step==='write'?'input[name=name]':'h3')?.focus();dialog.current.scrollTop=0;}},[step]);
+  useEffect(()=>{const resize=()=>{if(!scene.current||!world.current)return;const box=scene.current.getBoundingClientRect();const width=Math.max(box.width,box.height*1.5),height=width/1.5;const mobile=window.innerWidth<=800;Object.assign(world.current.style,{width:`${width}px`,height:`${height}px`,left:`${(box.width-width)*(mobile?0.65:0.5)}px`,top:`${(box.height-height)*(mobile?0.5:0.64)}px`});};const observer=new ResizeObserver(resize);observer.observe(scene.current);resize();return()=>observer.disconnect();},[]);
   const openLetter = event => { if(flying)return;opener.current=event?.currentTarget||trigger.current;setFeedback('');document.body.style.overflow='hidden';dialog.current.showModal();dialog.current.querySelector(step==='write'?'input[name=name]':'h3')?.focus(); };
-  const closeLetter = () => {dialog.current.close();opener.current?.focus();};
+  const closeLetter = () => {if(folding){clearTimeout(timer.current);setFolding(false);setFlying(false);}dialog.current.close();opener.current?.focus();};
   const body = `Dear Khushi,\n\n${message.trim()}\n\nFrom,\n${name.trim()}${reply.trim()?`\nReply to: ${reply.trim()}`:''}`;
   const mailto = `mailto:${recipient}?subject=${encodeURIComponent(`A letter after sunset — from ${name.trim()}`)}&body=${encodeURIComponent(body)}`;
+  const finishJourney=()=>{clearTimeout(timer.current);setFolding(false);setJourney(false);setFlying(false);setArrived(true);setStep('handoff');};
   const seal = () => {
-    dialog.current.close();setFlying(true);setFeedback('');
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    scene.current?.scrollIntoView({block:'center',behavior:reduced?'instant':'smooth'});
-    timer.current=setTimeout(()=>{setFlying(false);setArrived(true);setStep('handoff');document.body.style.overflow='hidden';dialog.current.showModal();},reduced?0:1800);
-  };
-  const containFocus = event => {
+    setFeedback('');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){dialog.current.close();scene.current?.scrollIntoView({block:'center',behavior:'instant'});finishJourney();return;}
+    setFlying(true);setFolding(true);
+    timer.current=setTimeout(()=>{dialog.current.close();setFolding(false);scene.current?.scrollIntoView({block:'center',behavior:'instant'});setJourney(true);timer.current=setTimeout(finishJourney,3900);},650);
+  };  const containFocus = event => {
     if(event.key!=='Tab')return;
     const items=[...dialog.current.querySelectorAll('button, a[href], input, textarea, select')].filter(node=>!node.disabled && node.getClientRects().length>0);
     const first=items[0], last=items[items.length-1];
@@ -45,13 +49,22 @@ export function LetterFooter() {
   const download = () => {const url=URL.createObjectURL(new Blob([body],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='a-letter-for-khushi.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setFeedback('Your letter is saved as a text file.');};
   const reset = () => {setStep('write');setName('');setReply('');setMessage('');setStamp('lavender');setFeedback('');setEmailOpened(false);setArrived(false);setError('');};
   return <footer className="letter-footer" id="letters" aria-labelledby="letters-title">
-    <div className="letter-intro"><div><span className="eyebrow">A SMALL PAUSE BEFORE YOU GO</span><h2 id="letters-title">Stay for the sunset.<br/>Leave a little <em>letter.</em></h2></div><div className="letter-invitation"><p>A thought, a hello, a tiny what-if.<br/>There’s room for it here.</p><button className="letter-primary" ref={trigger} onClick={openLetter} disabled={flying}>{flying?'On its way to the postbox…':arrived?'Your letter is ready':'Write me a letter'}</button><span className="letter-private">A private email to Khushi.</span></div></div>
+    <div className="letter-intro">
+      <div className="letter-invitation">
+        <h2 id="letters-title">Come sit with me <em>by the lake.</em></h2>
+        <p>I like to end the day with a sketch and a good playlist. Tell me what you’re making or what you’ve been listening to.</p>
+      </div>
+      <div className="sunset-invite-actions">
+        <button className="letter-primary" onClick={event => company.current?.open(event)} disabled={flying}>Join me</button>
+        <button className="letter-secondary" ref={trigger} onClick={openLetter} disabled={flying}>{flying ? 'Preparing your letter…' : arrived ? 'Finish sending' : 'Write a letter'}</button>
+      </div>
+    </div>
     <div ref={scene} className={'sunset-scene'+(flying?' letter-in-flight':'')}>
-      <img className="sunset-landscape" src={sunsetScene} alt="An illustrated lakeside sunset in peach and lavender, with a designer watching the water and a little postbox among the flowers." loading="lazy"/>
-      <span className="scene-caption">Letters after sunset</span>
+      <div className="scene-world" ref={world}><img className="sunset-landscape" src={sunsetScene} alt="An illustrated lakeside sunset in peach and lavender, with a designer writing beside the water and a little postbox among the flowers." loading="lazy"/>
+      <SunsetCompany ref={company} sceneRef={scene} busy={flying} onStatus={setCompanyStatus}/>
       <button className="postbox-hotspot" onClick={openLetter} disabled={flying} aria-label={arrived?'Open your prepared letter':'Write a private letter at the postbox'}><span>{arrived?'A letter is waiting':'The postbox is open'}</span></button>
-      <img className={'flying-envelope'+(flying?' envelope-travelling':'')+(arrived?' envelope-arrived':'')} src={envelopeSprite} alt="" aria-hidden="true"/>
-      <div className="sunset-status" role="status">{flying?'Folding a little thought into the evening…':arrived?'Your letter is ready. Finish sending in your email app.':'A quiet corner for a conversation.'}</div>
+      <img className={'flying-envelope'+(journey?' envelope-travelling':'')} src={envelopeSprite} alt="" aria-hidden="true"/>
+      </div><span className="scene-caption">Letters after sunset</span><div className="scene-letter-actions">{journey&&<button onClick={finishJourney}>Skip animation</button>}{arrived&&!flying&&<button onClick={openLetter}>Finish sending your letter</button>}</div><div className="sunset-status" role="status">{flying?(folding?'Folding your words into a little letter…':'A little letter, taking the scenic route.'):arrived?'Tucked into the postbox. Finish sending by email.':companyStatus||'A quiet corner for a conversation.'}</div>
     </div>
     <div className="letter-colophon"><span>© {new Date().getFullYear()} Khushi Tiwari</span><span>Made with curiosity, and a little care.</span><a href="#main">Back to the beginning</a></div>
     <dialog className={'letter-dialog stamp-'+stamp} ref={dialog} onKeyDown={containFocus} onClose={()=>{document.body.style.overflow="";}} aria-labelledby="letter-dialog-title" onClick={e=>{if(e.target===e.currentTarget)closeLetter();}} onCancel={event=>{event.preventDefault();closeLetter();setFeedback('');}}>
@@ -63,14 +76,8 @@ export function LetterFooter() {
         <fieldset className="stamp-picker"><legend>Choose a little mood for your stamp</legend><div>{stamps.map(s=><label key={s.id} className={'stamp-choice stamp-choice-'+s.id}><input type="radio" name="stamp" value={s.id} checked={stamp===s.id} onChange={()=>setStamp(s.id)}/><span>{s.name}<small>{s.caption}</small></span></label>)}</div></fieldset>
         <p className="letter-form-error" role="alert">{error}</p><button className="letter-primary letter-full" type="submit">Preview my letter</button><p className="letter-privacy">Your words stay in this page until you choose to open an email draft. Closing keeps your draft while this page is open.</p>
       </form>}
-      {step==='preview' && <div><span className="eyebrow">A LITTLE THOUGHT, READY TO FOLD · 02 / 03</span><h3 id="letter-dialog-title" tabIndex={-1}>Just like a real letter.</h3><div className="letter-paper"><div className="letter-paper-top"><span>To Khushi</span><span className="letter-stamp">{stamps.find(s=>s.id===stamp).caption}</span></div><p className="letter-salutation">Dear Khushi,</p><p className="letter-handwriting">{message.trim()}</p><p className="letter-signature">With a little curiosity,<br/>{name.trim()}</p>{reply&&<small className="letter-reply">Reply to {reply}</small>}</div><div className="letter-review-actions"><button className="letter-secondary" onClick={()=>setStep('write')}>Keep writing</button><button className="letter-primary" onClick={seal}>Fold & seal my letter</button></div><p className="letter-privacy">Next, a little journey to the postbox. Sending happens in your email app.</p></div>}
+      {step==='preview' && <div><span className="eyebrow">A LITTLE THOUGHT, READY TO FOLD · 02 / 03</span><h3 id="letter-dialog-title" tabIndex={-1}>Just like a real letter.</h3><div className={"letter-paper"+(folding?" letter-paper-folding":"")}><div className="letter-paper-top"><span>To Khushi</span><span className="letter-stamp">{stamps.find(s=>s.id===stamp).caption}</span></div><p className="letter-salutation">Dear Khushi,</p><p className="letter-handwriting">{message.trim()}</p><p className="letter-signature">With a little curiosity,<br/>{name.trim()}</p>{reply&&<small className="letter-reply">Reply to {reply}</small>}</div><div className="letter-review-actions"><button disabled={folding} className="letter-secondary" onClick={()=>setStep('write')}>Keep writing</button><button className="letter-primary" onClick={seal} disabled={folding}>{folding?"Folding your letter…":"Fold & seal my letter"}</button></div><p className="letter-privacy">Next, a little journey to the postbox. Sending happens in your email app.</p></div>}
       {step==='handoff' && <div className="letter-handoff"><img src={envelopeSprite} alt="A sealed cream envelope with a lavender seal"/><span className="eyebrow">ONE LAST LITTLE STEP · 03 / 03</span><h3 id="letter-dialog-title" tabIndex={-1}>From this sunset<br/>to my inbox.</h3><p>{emailOpened?'Finish sending in your email app. Your letter is still here if you need another way.':'Your letter is folded and ready. Open the draft below, then send it from your email app.'}</p><div className="letter-recipient">To <strong>{recipient}</strong></div><a className="letter-primary letter-full" href={mailto} onClick={()=>setEmailOpened(true)}>Open email draft</a><div className="letter-fallbacks"><button onClick={copy}>Copy letter</button><button onClick={download}>Download letter</button><button onClick={()=>setStep('preview')}>Read it again</button></div><p className="letter-feedback" role="status">{feedback||'Opening a draft does not send the email automatically.'}</p><button className="letter-another" onClick={reset}>Start a new letter</button></div>}
     </dialog>
   </footer>;
 }
-
-
-
-
-
-

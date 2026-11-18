@@ -57,7 +57,7 @@
 }
 
 .about-story h2 em,
-.contact-cover h1 em {
+.about-story .profile-link {
   color: var(--scene-action);
 }
 
@@ -225,6 +225,15 @@
 .contact-cover h1 {
   max-width: 21ch;
   font-size: clamp(49px, 7.5vw, 112px);
+}
+
+.contact-cover h1 em {
+  color: var(--scene-action);
+}
+
+.contact-intro {
+  max-width: 50ch;
+  margin: 16px 0 0;
 }
 
 .contact-cover > p {

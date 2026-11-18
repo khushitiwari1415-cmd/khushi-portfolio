@@ -133,3 +133,9 @@ Compared the Clinspire reference with .local/case-detail-desktop.png and .local/
 Verified Organisation in desktop Chrome and the Intent layout at 390px. Tested section jumps, active section, Back to top, and navigation between projects. Fixed a global navigation rule that hid mobile contents links and retested. Original Intent UI screenshots loaded, and the detail preview reported no console errors.
 
 final result: passed
+
+## Centered hero with handwritten notes
+
+Compared the selected centered stationery mockup with .local/hero-tutorial-notes.png. The cream canvas, lavender wash, one-line serif name, role, intro, and About action stay centered. The hanging and taped notes use the approved tutorial joke, with matching alternative text. On phones the notes sit together below the introduction. Verified both notes are readable, there is no horizontal overflow at phone width, and More about me opens About.
+
+final result: passed

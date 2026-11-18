@@ -1,0 +1,81 @@
+/* Editorial display type, with DM Sans for reading and controls. */
+:is(.hero, .profile-page, .study-hero) h1,
+:is(.work-heading, .notes-heading, .letter-intro, .profile-page, .study-section, .study-more) h2 {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 11.5vw, 180px);
+}
+
+.profile-page h1 {
+  font-size: var(--type-display);
+}
+
+.work-heading h2,
+.notes-heading h2,
+.profile-page .about-story h2 {
+  font-size: var(--type-section);
+}
+
+.letter-intro h2,
+.profile-page :is(.about-work, .about-away, .resume-work) h2,
+.study-hero h1 {
+  font-size: var(--type-subsection);
+}
+
+.study-section h2 {
+  font-size: clamp(28px, 3vw, 42px);
+}
+
+.hero-role,
+.work-heading .eyebrow {
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.work-heading > p,
+.notes-heading > p,
+.letter-invitation > p,
+.study-hero > p,
+.study-section :is(p, li),
+.profile-page :is(.about-story, .about-projects, .about-away, .resume-project) p,
+.profile-page p.contact-intro {
+  font-size: var(--type-body);
+  line-height: 1.55;
+}
+
+.site-header,
+.work-heading,
+.design-notes,
+footer.letter-footer {
+  padding-inline: var(--page-gutter);
+}
+
+.work-heading,
+.notes-heading {
+  gap: 24px;
+}
+
+@media (max-width: 640px) {
+  .work-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .hero h1 {
+    font-size: clamp(43px, 13vw, 84px);
+  }
+}
+
+@media print {
+  .profile-page .profile-cover h1 {
+    font-size: 48px;
+  }
+}

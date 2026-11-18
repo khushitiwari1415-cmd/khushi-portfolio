@@ -1,4 +1,5 @@
 import { SiteHeader } from './SiteHeader.jsx';
+import heroNotes from './assets/hero-notes.png';
 import { LetterFooter } from './LetterFooter.jsx';
 import { DesignNotes } from './DesignNotes.jsx';
 import workspaceBackground from './assets/workspace-background.png';
@@ -17,11 +18,14 @@ export function App(){
    if (!stage) return;
 
    let frame = 0;
+   let initialAnchor = document.getElementById(window.location.hash.slice(1));
    const update = () => {
      frame = 0;
      const height = stage.offsetHeight;
      if (height === 0) return;
 
+     initialAnchor?.scrollIntoView({ behavior: 'instant' });
+     initialAnchor = null;
      const position = -root.getBoundingClientRect().top / height;
      if (!Number.isFinite(position)) return;
 
@@ -51,11 +55,21 @@ export function App(){
  return <><a className="skip" href="#main">Skip to content</a><SiteHeader />
  <main id="main">
  <section className="hero" aria-labelledby="hero-title">
-   <h1 id="hero-title">Khushi Tiwari</h1>
-   <p className="hero-role">Product Designer</p>
-   <div className="hero-intro">
-     <p>I design digital experiences that make complex tasks feel simpler.</p>
-     <a className="hero-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+   <div className="hero-center">
+     <p className="hero-role">Product Designer</p>
+     <h1 id="hero-title">Khushi <em>Tiwari</em></h1>
+     <div className="hero-intro">
+       <p>I design digital experiences that make complex tasks feel simpler.</p>
+       <a className="hero-link" href="/about">More about me <span aria-hidden="true">↗</span></a>
+     </div>
+   </div>
+   <div className="hero-margins">
+     <div className="hero-margin hero-margin-left">
+       <img src={heroNotes} alt="It’s intuitive." />
+     </div>
+     <div className="hero-margin hero-margin-right">
+       <img src={heroNotes} alt="Then why is there a tutorial?" />
+     </div>
    </div>
  </section>
  <section id="work" className="work" aria-labelledby="work-title"><div className="work-heading"><div><span className="eyebrow">A CLOSER LOOK AT THE PROCESS</span><h2 id="work-title">Selected <em>work.</em></h2></div><p>Human needs.<br/>Thoughtful digital experiences.</p></div><div className="project-stack" ref={stack}>{projects.map((p,i)=><span key={p.id} id={p.id} className="project-anchor" style={{top:`${i*100}svh`}} ref={el=>cards.current[i]=el}/>)}<div className="showcase-stage"><div className="scene-track">{projects.map((p,i)=><div className={"scene"+(active===i?" scene-active":"")} key={p.id}><img className="case-backdrop" src={p.image} alt="" aria-hidden="true"/></div>)}</div><div className="case-wash"/><div className="project-deck">{projects.map((p,i)=><article key={p.id} data-index={i} className={'project project-'+i+(active===i?' is-active':'')} aria-hidden={active!==i} inert={active!==i} aria-labelledby={p.id+'-title'}><div className="project-layout"><div className="project-copy"><span className="project-meta">CASE STUDY / 0{i+1}</span><h3 id={p.id+'-title'}>{p.name}</h3><p className="case-subtitle">{p.title.replace('\n',' ')}</p><p className="description">{p.description}</p><div className="case-actions"><a className="case-link" href={'/work/' + p.id}>Read case study <span aria-hidden="true">↗</span><span className="sr-only">: {p.name}</span></a></div></div><div className="case-topics" aria-label={p.name+' design themes'}>{themes[i].map((theme,j)=><div className="topic-tile" key={theme}><span className="topic-index">0{j+1}</span><p>{theme}</p></div>)}</div></div></article>)}</div><div className={"project-controls"+(controlsVisible?"":" controls-hidden")}><a href="#work" className="all-work">Selected work</a><div className="current-project" aria-live="polite"><span>{projects[active].name}</span><span>{active+1} / 2</span></div><button onClick={()=>move(active-1)} disabled={active===0} aria-label="Previous case study">↑</button><button onClick={()=>move(active+1)} disabled={active===projects.length-1} aria-label="Next case study">↓</button></div></div></div></section><DesignNotes/></main><LetterFooter/></>;

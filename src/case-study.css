@@ -1,8 +1,7 @@
 .study {
-  --study-gutter: clamp(20px, 2.4vw, 48px);
   max-width: 1600px;
   margin-inline: auto;
-  padding-inline: var(--study-gutter);
+  padding-inline: var(--page-gutter);
 }
 
 .study-hero {

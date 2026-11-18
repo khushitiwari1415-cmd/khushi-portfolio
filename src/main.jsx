@@ -9,6 +9,7 @@ import "./styles.css";
 import "./hero.css";
 import "./navigation.css";
 import "./profile.css";
+import "./typography.css";
 
 const caseSlug = window.location.pathname.match(/^\/work\/(organisation|intent)\/?$/)?.[1];
 const profilePage = window.location.pathname.match(/^\/(resume|about|contact)\/?$/)?.[1];

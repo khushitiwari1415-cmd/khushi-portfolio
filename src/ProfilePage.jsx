@@ -4,10 +4,9 @@ import { caseStudies } from './case-studies.js';
 import envelope from './assets/letter-envelope.png';
 
 const email = 'khushitiwari1415@gmail.com';
-const callRequest = 'mailto:' + email + '?subject=' + encodeURIComponent('Let’s set up a call');
+const introduction = 'mailto:' + email + '?subject=' + encodeURIComponent('Hello Khushi');
 const contactLinks = [
   ['LinkedIn', 'https://www.linkedin.com/in/khushitiwari1415/'],
-  ['GitHub', 'https://github.com/khushitiwari1415-cmd/khushi-portfolio'],
   ['Notion portfolio', 'https://rocky-squid-b1f.notion.site/khushi-tiwari'],
 ];
 
@@ -21,7 +20,7 @@ function About() {
       <h2 id="about-story-title">Curiosity comes <em>first.</em></h2>
       <div>
         <p>I start with the why behind an interaction: what someone is trying to do, where they hesitate, and what would make the next step feel clear. I use those answers to shape the flow.</p>
-        <a className="profile-link" href="/#behind-the-pixels">Read my design notes <span aria-hidden="true">↗</span></a>
+        <a className="profile-link" href="/#behind-the-pixels">See how I work <span aria-hidden="true">↗</span></a>
       </div>
     </section>
     <section className="about-work" aria-labelledby="about-work-title">
@@ -82,11 +81,12 @@ function Contact() {
 
   return <>
     <div className="contact-cover">
-      <a className="contact-envelope" href={callRequest} aria-label="Request a call by email">
+      <a className="contact-envelope" href={introduction} aria-label="Start a conversation by email">
         <img src={envelope} alt="" width="112" height="112" />
       </a>
-      <h1>Let’s hop on <em>a call.</em></h1>
-      <a className="contact-call" href={callRequest}>Suggest a time by email <span aria-hidden="true">↗</span></a>
+      <h1>Tell me what you’re <em>building.</em></h1>
+      <p className="contact-intro">I’d love to hear about the product, the people using it, and the part you’re still figuring out.</p>
+      <a className="contact-call" href={introduction}>Start a conversation <span aria-hidden="true">↗</span></a>
       <div className="contact-email">
         <a href={'mailto:' + email}>{email}</a>
         <button type="button" onClick={copyEmail}>Copy email</button>

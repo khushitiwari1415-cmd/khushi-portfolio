@@ -2,6 +2,7 @@
   color-scheme: light;
   --page: #faf7f1;
   --surface: #fffdf8;
+  --work-surface: #fff;
   --ink: #292432;
   --muted: #62586b;
   --accent: #634784;
@@ -27,6 +28,12 @@
 
   --font-body: 'DM Sans', Arial, sans-serif;
   --font-editorial: 'Instrument Serif', Georgia, serif;
+  --type-display: clamp(48px, 9vw, 132px);
+  --type-section: clamp(42px, 6vw, 78px);
+  --type-subsection: clamp(30px, 4vw, 52px);
+  --type-body: clamp(15px, 1.35vw, 18px);
+  --type-label: 12px;
+  --page-gutter: clamp(20px, 4vw, 64px);
   --radius-panel: 20px;
   --radius-tile: 14px;
   --radius-pill: 999px;
@@ -36,6 +43,7 @@
   color-scheme: dark;
   --page: #211b2a;
   --surface: #2b2335;
+  --work-surface: var(--surface);
   --ink: #f5eef7;
   --muted: #cbbdd4;
   --accent: #d7bbf2;
