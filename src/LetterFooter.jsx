@@ -7,7 +7,7 @@ import './letter-footer.css';
 const recipient = 'khushitiwari1415@gmail.com';
 const stamps = [ {id:'lavender',name:'Lavender',caption:'A little wonder'}, {id:'apricot',name:'Apricot',caption:'A warm hello'}, {id:'sage',name:'Sage',caption:'Something thoughtful'} ];
 
-export function LetterFooter() {
+export function LetterFooter({ desk = false }) {
   const dialog = useRef(null);
   const trigger = useRef(null);
   const opener = useRef(null);
@@ -48,7 +48,9 @@ export function LetterFooter() {
   const copy = async () => {try{await navigator.clipboard.writeText(body);setFeedback('Letter copied. Paste it into your email when you’re ready.');}catch{setFeedback('Copy isn’t available here. You can download your letter instead.');}};
   const download = () => {const url=URL.createObjectURL(new Blob([body],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='a-letter-for-khushi.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setFeedback('Your letter is saved as a text file.');};
   const reset = () => {setStep('write');setName('');setReply('');setMessage('');setStamp('lavender');setFeedback('');setEmailOpened(false);setArrived(false);setError('');};
-  return <footer className="letter-footer" id="letters" aria-labelledby="letters-title">
+  return <footer className={'letter-footer'+(desk?' letter-desk':'')} id="letters" aria-labelledby="letters-title">
+    <div className="lake-board">
+    {desk&&<span className="lake-tab">⁕ Letters after sunset</span>}
     <div className="letter-intro">
       <div className="letter-invitation">
         <h2 id="letters-title">Come sit with me <em>by the lake.</em></h2>
@@ -59,6 +61,10 @@ export function LetterFooter() {
         <button className="letter-secondary" ref={trigger} onClick={openLetter} disabled={flying}>{flying ? 'Preparing your letter…' : arrived ? 'Finish sending' : 'Write a letter'}</button>
       </div>
     </div>
+    <div className="lake-frame">
+    {desk&&<div className="lake-frame-name"><span aria-hidden="true">#</span> By the lake / the postbox is open</div>}
+    {desk&&<p className="lake-sticky">psst — the postbox actually works.</p>}
+    {desk&&<span className="lake-handles" aria-hidden="true"><i/><i/><i/><i/></span>}
     <div ref={scene} className={'sunset-scene'+(flying?' letter-in-flight':'')}>
       <div className="scene-world" ref={world}><img className="sunset-landscape" src={sunsetScene} alt="An illustrated lakeside sunset in peach and lavender, with a designer writing beside the water and a little postbox among the flowers." loading="lazy"/>
       <SunsetCompany ref={company} sceneRef={scene} busy={flying} onStatus={setCompanyStatus}/>
@@ -66,7 +72,9 @@ export function LetterFooter() {
       <img className={'flying-envelope'+(journey?' envelope-travelling':'')} src={envelopeSprite} alt="" aria-hidden="true"/>
       </div><span className="scene-caption">Letters after sunset</span><div className="scene-letter-actions">{journey&&<button onClick={finishJourney}>Skip animation</button>}{arrived&&!flying&&<button onClick={openLetter}>Finish sending your letter</button>}</div><div className="sunset-status" role="status">{flying?(folding?'Folding your words into a little letter…':'A little letter, taking the scenic route.'):arrived?'Tucked into the postbox. Finish sending by email.':companyStatus||'A quiet corner for a conversation.'}</div>
     </div>
-    <div className="letter-colophon"><span>© {new Date().getFullYear()} Khushi Tiwari</span><span>Made with curiosity, and a little care.</span><a href="#main">Back to the beginning</a></div>
+    </div>
+    </div>
+    <div className="letter-colophon"><span>© {new Date().getFullYear()} Khushi Tiwari</span><span>Made with curiosity, and a little care.</span><a href="#main">{desk?'↑ Back to the desk':'Back to the beginning'}</a></div>
     <dialog className={'letter-dialog stamp-'+stamp} ref={dialog} onKeyDown={containFocus} onClose={()=>{document.body.style.overflow="";}} aria-labelledby="letter-dialog-title" onClick={e=>{if(e.target===e.currentTarget)closeLetter();}} onCancel={event=>{event.preventDefault();closeLetter();setFeedback('');}}>
       <button className="letter-close" onClick={closeLetter} aria-label="Close letter">Close</button>
       {step==='write' && <form onSubmit={e=>{e.preventDefault();if(name.trim().length<2 || message.trim().length<10){setError('Please add your name and at least 10 characters for your letter.');return;}setError('');setStep('preview');setFeedback('');dialog.current.scrollTop=0;}}>

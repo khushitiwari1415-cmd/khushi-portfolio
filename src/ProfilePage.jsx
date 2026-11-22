@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { SiteHeader } from './SiteHeader.jsx';
 import { caseStudies } from './case-studies.js';
+import { linkedInUrl } from './profile-links.js';
 import envelope from './assets/letter-envelope.png';
 
 const email = 'khushitiwari1415@gmail.com';
 const introduction = 'mailto:' + email + '?subject=' + encodeURIComponent('Hello Khushi');
 const contactLinks = [
-  ['LinkedIn', 'https://www.linkedin.com/in/khushitiwari1415/'],
+  ['LinkedIn', linkedInUrl],
   ['Notion portfolio', 'https://rocky-squid-b1f.notion.site/khushi-tiwari'],
 ];
 

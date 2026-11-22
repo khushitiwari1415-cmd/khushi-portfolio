@@ -11,7 +11,10 @@ import "./navigation.css";
 import "./profile.css";
 import "./typography.css";
 
-const caseSlug = window.location.pathname.match(/^\/work\/(organisation|intent)\/?$/)?.[1];
+const caseAliases = { 'case-1': 'organisation', 'case-2': 'intent' };
+const path = window.location.pathname;
+const caseSlug = path.match(/^\/work\/(organisation|intent)\/?$/)?.[1]
+  ?? caseAliases[path.match(/^\/(case-[12])\/?$/)?.[1]];
 const profilePage = window.location.pathname.match(/^\/(resume|about|contact)\/?$/)?.[1];
 const page = caseSlug && caseStudies[caseSlug]
   ? <CaseStudy slug={caseSlug} />
