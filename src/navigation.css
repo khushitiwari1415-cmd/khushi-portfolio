@@ -27,3 +27,138 @@
     gap: 14px;
   }
 }
+
+/* Homepage header: Figma-style top bar on the desk's warm paper. */
+.figma-header {
+  --paper: #f4f1ea;
+  --desk-ink: #1c1b19;
+  --quiet: #8a857c;
+  --tomato: #ff4f2b;
+  --edge: #1c1b191f;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  min-height: 60px;
+  padding: 8px var(--page-gutter);
+  border-bottom: 1px solid var(--edge);
+  background: var(--paper);
+  color: var(--desk-ink);
+  font: 500 13px 'Geist', var(--font-body);
+}
+
+.figma-file { display: inline-flex; align-items: center; gap: 10px; min-width: 0; justify-self: start; }
+.figma-file-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: var(--desk-ink);
+  color: var(--paper);
+  font: 400 19px/1 var(--font-editorial);
+  transition: transform 200ms cubic-bezier(.3, 1.6, .5, 1), background 160ms ease;
+}
+.figma-file:hover .figma-file-icon { transform: rotate(-8deg); background: var(--tomato); }
+.figma-file-name { overflow: hidden; font: 400 22px/1 var(--font-editorial); white-space: nowrap; text-overflow: ellipsis; }
+.figma-file-name span { color: var(--quiet); font: 400 13px 'Geist', var(--font-body); }
+
+/* nav as a Figma segmented tool group */
+.site-header.figma-header nav.figma-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  background: #fffdf8;
+}
+.site-header.figma-header .figma-tabs a {
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 5px;
+  color: var(--desk-ink);
+  text-decoration: none;
+  transition: background 140ms ease, color 140ms ease;
+}
+.site-header.figma-header .figma-tabs a:hover { background: #1c1b190d; text-decoration: none; }
+.site-header.figma-header .figma-tabs a[aria-current] { background: var(--desk-ink); color: var(--paper); text-decoration: none; }
+
+/* multiplayer avatars + share-style button */
+.figma-actions { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+.figma-people { display: flex; }
+.figma-avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  transition: transform 180ms cubic-bezier(.3, 1.6, .5, 1);
+}
+.figma-avatar + .figma-avatar { margin-left: -8px; }
+.figma-avatar.is-khushi { z-index: 1; background: var(--tomato); cursor: pointer; }
+.figma-avatar.is-you { background: var(--desk-ink); }
+.figma-avatar:hover { z-index: 2; transform: translateY(-2px); }
+.figma-avatar::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--desk-ink);
+  color: var(--paper);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+.figma-avatar:hover::after, .figma-avatar:focus-visible::after { opacity: 1; }
+.figma-share {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 6px;
+  background: var(--tomato);
+  color: #fff;
+  font-weight: 600;
+  transition: background 160ms ease, transform 160ms cubic-bezier(.3, 1.6, .5, 1);
+}
+.figma-share:hover { background: var(--desk-ink); }
+.figma-share:active { transform: scale(.95); }
+
+/* follow mode: Figma outlines the viewport in the followed person's colour */
+.follow-frame { position: fixed; inset: 0; z-index: 80; border: 3px solid var(--accent-follow, #ff4f2b); pointer-events: none; animation: follow-in 200ms ease; }
+.follow-frame span { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); padding: 4px 10px 5px; border-radius: 0 0 5px 5px; background: #ff4f2b; color: #fff; font: 500 12px 'Geist', var(--font-body); }
+@keyframes follow-in { from { opacity: 0; } }
+
+@media (max-width: 860px) {
+  .figma-header { grid-template-columns: minmax(0, 1fr) auto; row-gap: 8px; }
+  .figma-file-name span { display: none; }
+  .site-header.figma-header nav.figma-tabs { grid-column: 1 / -1; grid-row: 2; justify-content: space-between; }
+  .site-header.figma-header .figma-tabs a { flex: 1; justify-content: center; padding: 0 8px; }
+}
+
+@media (max-width: 420px) {
+  .figma-avatar.is-you { display: none; }
+  .figma-file-name { font-size: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figma-file-icon, .figma-avatar, .figma-share { transition: none; }
+  .follow-frame { animation: none; }
+}
+
+/* Keep in-page jumps clear of the sticky homepage header. */
+:where(#work, #letters, #behind-the-pixels) { scroll-margin-top: 64px; }

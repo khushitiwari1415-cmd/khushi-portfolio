@@ -1,0 +1,66 @@
+/* Figma-style loader: Khushi's cursor draws the first frame while the desk loads. */
+html.is-loading, html.is-loading body { overflow: hidden; }
+
+.figma-loader {
+  --paper: #f4f1ea;
+  --desk-ink: #1c1b19;
+  --quiet: #8a857c;
+  --tomato: #ff4f2b;
+  --edge: #1c1b191f;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='1.5' cy='1.5' r='1' fill='%231c1b19' fill-opacity='.14'/%3E%3C/svg%3E");
+  color: var(--desk-ink);
+  font: 500 13px 'Geist', var(--font-body);
+}
+.figma-loader.is-leaving { pointer-events: none; animation: loader-out 600ms cubic-bezier(.6, 0, .3, 1) forwards; }
+.figma-loader.is-leaving .loader-anchor { animation: loader-zoom 600ms cubic-bezier(.6, 0, .3, 1) forwards; }
+@keyframes loader-out { 55% { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+@keyframes loader-zoom { to { scale: 2.6; opacity: 0; } }
+
+/* top bar, like the file header in Figma */
+.loader-bar { display: flex; justify-content: space-between; align-items: center; min-height: 60px; padding: 0 var(--page-gutter); border-bottom: 1px solid var(--edge); background: var(--paper); }
+.loader-file { display: inline-flex; align-items: center; gap: 8px; color: var(--quiet); }
+.loader-file i { font-style: normal; opacity: .6; }
+.loader-file b { color: var(--desk-ink); font-weight: 500; }
+.loader-file-icon { display: grid; place-items: center; width: 30px; height: 30px; margin-right: 2px; border-radius: 6px; background: var(--desk-ink); color: var(--paper); font: 400 19px/1 var(--font-editorial); }
+.loader-skip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 4px; border: 0; background: none; color: var(--quiet); font: inherit; cursor: pointer; }
+.loader-skip:hover { color: var(--desk-ink); }
+.loader-skip kbd { padding: 1px 6px; border: 1px solid var(--edge); border-radius: 4px; background: #fffdf8; font: 500 11px 'Geist', var(--font-body); }
+
+/* the frame being drawn */
+.loader-stage { position: relative; overflow: hidden; }
+.loader-anchor { position: absolute; top: 0; left: 0; transform-origin: 50% 50%; }
+.loader-frame { position: relative; width: 2px; height: 2px; border: 1.5px solid var(--tomato); background: #fffdf8; }
+.loader-frame-name { position: absolute; bottom: calc(100% + 7px); left: -1px; color: var(--quiet); font-size: 12px; white-space: nowrap; }
+.loader-name { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; font: 400 clamp(34px, 6vw, 52px)/1 var(--font-editorial); letter-spacing: -.03em; white-space: nowrap; }
+.loader-name span:not(:empty)::after { content: ''; display: inline-block; width: 2px; height: .9em; margin-left: 3px; background: var(--tomato); vertical-align: -.1em; animation: caret 900ms steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.loader-handles i { position: absolute; width: 8px; height: 8px; border: 1.5px solid var(--tomato); background: #fff; }
+.loader-handles i:nth-child(1) { top: -5px; left: -5px; }
+.loader-handles i:nth-child(2) { top: -5px; right: -5px; }
+.loader-handles i:nth-child(3) { bottom: -5px; left: -5px; }
+.loader-handles i:nth-child(4) { bottom: -5px; right: -5px; }
+.loader-size { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); padding: 2px 7px; border-radius: 3px; background: var(--tomato); color: #fff; font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.loader-cursor { position: absolute; top: 0; left: 0; display: flex; align-items: flex-start; margin: -2px 0 0 -2px; pointer-events: none; }
+.loader-cursor svg { fill: var(--tomato); stroke: #fff; stroke-width: 1.2; }
+.loader-cursor span { margin: 16px 0 0 -2px; padding: 2px 8px; border-radius: 3px; background: var(--tomato); color: #fff; font-size: 12px; }
+
+/* progress */
+.loader-progress { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; width: min(420px, calc(100% - 48px)); margin: 0 auto clamp(40px, 10vh, 96px); }
+.loader-message { color: var(--quiet); }
+.loader-dots { display: inline-block; animation: caret 1.2s steps(1) infinite; }
+.loader-percent { font-variant-numeric: tabular-nums; }
+.loader-track { grid-column: 1 / -1; height: 3px; overflow: hidden; background: #1c1b1914; }
+.loader-track span { display: block; height: 100%; background: var(--tomato); transform: scaleX(0); transform-origin: left; }
+
+@media (prefers-reduced-motion: reduce) {
+  .figma-loader.is-leaving, .figma-loader.is-leaving .loader-anchor { animation-duration: 150ms; }
+  .figma-loader.is-leaving .loader-anchor { animation-name: none; }
+  .loader-name span::after, .loader-dots { animation: none; }
+}
